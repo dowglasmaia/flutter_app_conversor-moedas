@@ -10,6 +10,16 @@ const apiFinanceUrl =
 void main() async {
   runApp(MaterialApp(
     home: Home(),
+    theme: ThemeData(
+        hintColor: Colors.amber,
+        primaryColor: Colors.white,
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          focusedBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.amber)),
+          hintStyle: TextStyle(color: Colors.amber),
+        )),
   ));
 }
 
@@ -24,6 +34,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  double dolar;
+  double euro;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +77,60 @@ class _HomeState extends State<Home> {
                     ),
                   );
                 } else {
-                  return Container(
-                    color: Colors.green,
+                  /*capturando o valor de compra do Dolar, que recebemos da responta da API.*/
+                  dolar = snapshort.data['results']['currencies']['USD']['buy'];
+                  euro = snapshort.data['results']['currencies']['EUR']['buy'];
+
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.stretch, //cetralizar
+                      children: <Widget>[
+                        Icon(
+                          Icons.monetization_on,
+                          size: 150.0,
+                          color: Colors.amber,
+                        ),
+
+                        /*REAL*/
+                        Divider(),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Reais",
+                            labelStyle: TextStyle(color: Colors.amber),
+                            border: OutlineInputBorder(),
+                            prefixText: "R\$",
+                          ),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
+
+                        /* DOLAR*/
+                        Divider(),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Dolares",
+                            labelStyle: TextStyle(color: Colors.amber),
+                            border: OutlineInputBorder(),
+                            prefixText: "US\$",
+                          ),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
+
+                        /*EURO*/
+                        Divider(),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "Euro",
+                            labelStyle: TextStyle(color: Colors.amber),
+                            border: OutlineInputBorder(),
+                            prefixText: "€",
+                          ),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
+                        Divider(),
+                      ],
+                    ),
                   );
                 }
             }
