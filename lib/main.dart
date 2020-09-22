@@ -174,6 +174,7 @@ Widget buildTextFiel(
     ),
     style: TextStyle(color: Colors.amber, fontSize: 25.0),
     onChanged: f, // pega as mudanças digitados no campo
-    keyboardType: TextInputType.number, //define que somente numeros
+    keyboardType: TextInputType.numberWithOptions(decimal: true), //Números decimais no iOS tbm
+   // keyboardType: TextInputType.number, //define que somente numeros
   );
 }
